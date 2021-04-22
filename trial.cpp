@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 
 using namespace std;
+int SourceFileList();
+int AddSourceFile(string, string);
 float rabinKarp(char seq[], char arr[], int line, int sent_line)
 {
     //seq is the sentence of the input text and arr corresponds to lines of the output file.
@@ -39,7 +41,7 @@ float rabinKarp(char seq[], char arr[], int line, int sent_line)
             if (y == len1)
             {
                 l++;
-                cout << "Sentence " << sent_line << " of the input text found at line " << line << " of output file" << std::endl;
+             //   cout << "Sentence " << sent_line << " of the input text found at line " << line << " of output file" << std::endl;
                 break;
             }
         }
@@ -58,12 +60,20 @@ float rabinKarp(char seq[], char arr[], int line, int sent_line)
     return l;
 }
 
-int PlagChecker(string TopicName = "", string FileName = "")
+int PlagChecker(string TopicName = "Russia", string FileName = "inputtest")
 {
-
-    string s = "The United States emerged from the thirteen British colonies established along the East Coast.The end of the Cold War and the collapse of the Soviet Union.United States has a very powerful army.North America migrated from Siberia by way of the Bering land bridge.It is hard for other nation to fight against united nation.";
-    istringstream iss(s);
+    ifstream SourceFile;
+    SourceFile.open("Sources/" + TopicName + ".txt");
+    string SourceFileText;
+    string SourceFileContent;
+    while (getline(SourceFile, SourceFileText))
+    {
+        SourceFileContent += SourceFileText;
+    }
+    SourceFile.close();
+    istringstream iss(SourceFileContent);
     string strtest;
+    string TestData = "";
     int line;
     float q = 0;
     float p = 0;
@@ -79,10 +89,12 @@ int PlagChecker(string TopicName = "", string FileName = "")
             char seq[m + 1];
             strcpy(seq, strtest.c_str());
             ifstream file;
-            file.open("inputtest.txt");
+            file.open(FileName + ".txt");
             string st1;
             while (getline(file, st1))
             {
+                // cout << st1;
+
                 int n = st1.length();
                 char char_array[n + 1];
                 strcpy(char_array, st1.c_str());
@@ -91,14 +103,29 @@ int PlagChecker(string TopicName = "", string FileName = "")
                 if (q > 0)
                     p++;
             }
+            file.close();
+
             if (p > 0)
                 match_line++;
         }
         p = 0;
     }
+    ifstream file;
+    file.open(FileName + ".txt");
+    string st1;
+    while (getline(file, st1))
+    {
+        TestData += st1 + "\n";
+    }
     ofstream myfile;
     myfile.open("output.txt");
-    float plag = 100 * (match_line / total_line);
+    float plag;
+    if (total_line == 0)
+    {
+        plag = 0;
+    }
+    else
+        plag = 100 * (match_line / total_line);
     cout << " " << std::endl;
     myfile << "Total match sentence in the given input text is " << match_line << " and total sentence in the given input text is " << total_line << std::endl;
     cout << "Total match sentence in the given input text is " << match_line << " and total sentence in the given input text is " << total_line << std::endl;
@@ -111,6 +138,11 @@ int PlagChecker(string TopicName = "", string FileName = "")
     {
         myfile << "Plagarism is not detected in the given file and it is " << plag << " %" << std::endl;
         cout << "Plagarism is not detected in the given file and it is " << plag << " %" << std::endl;
+    }
+    if (plag == 0)
+    {
+        cout << TestData;
+        AddSourceFile(TopicName, TestData);
     }
     cout << " " << std::endl;
     return 0;
@@ -150,11 +182,7 @@ int AddSourceFile(string FileName, string Content)
 int main()
 {
 
-    cout << "Hie Death\n";
-    cout << SourceFileList();
-    AddSourceFile("Russia", "Hie");
-    cout << SourceFileList();
-    cout << endl;
+    cout << "Hie Death";
     PlagChecker();
     return 0;
 }
