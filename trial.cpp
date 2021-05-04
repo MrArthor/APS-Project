@@ -1,8 +1,19 @@
 #include <bits/stdc++.h>
+#include <windows.h>
 
 using namespace std;
 int SourceFileList();
 int AddSourceFile(string, string);
+void loading()
+{
+
+    for (int i = 0; i < 5; i++)
+    {
+        cout << "****";
+        Sleep(1000);
+    }
+}
+//yaha par kiya h add
 float rabinKarp(char seq[], char arr[], int line, int sent_line)
 {
     //seq is the sentence of the input text and arr corresponds to lines of the output file.
@@ -41,7 +52,7 @@ float rabinKarp(char seq[], char arr[], int line, int sent_line)
             if (y == len1)
             {
                 l++;
-             //   cout << "Sentence " << sent_line << " of the input text found at line " << line << " of output file" << std::endl;
+                //   cout << "Sentence " << sent_line << " of the input text found at line " << line << " of output file" << std::endl;
                 break;
             }
         }
@@ -59,7 +70,6 @@ float rabinKarp(char seq[], char arr[], int line, int sent_line)
     }
     return l;
 }
-
 int PlagChecker(string TopicName = "Russia", string FileName = "inputtest")
 {
     ifstream SourceFile;
@@ -93,8 +103,6 @@ int PlagChecker(string TopicName = "Russia", string FileName = "inputtest")
             string st1;
             while (getline(file, st1))
             {
-                // cout << st1;
-
                 int n = st1.length();
                 char char_array[n + 1];
                 strcpy(char_array, st1.c_str());
@@ -147,6 +155,7 @@ int PlagChecker(string TopicName = "Russia", string FileName = "inputtest")
     cout << " " << std::endl;
     return 0;
 }
+//yaha par
 int SourceFileList()
 {
     int NumberOfFiles = 0;
@@ -161,6 +170,7 @@ int SourceFileList()
     cout << endl;
     return NumberOfFiles;
 }
+//aur yaha par bas
 int AddSourceFile(string FileName, string Content)
 {
     int NumberOfFiles = 0;
@@ -179,10 +189,104 @@ int AddSourceFile(string FileName, string Content)
     return 0;
 }
 
-int main()
+int about()
 {
-
-    cout << "Hie Death";
-    PlagChecker();
+    cout << "\n\nPlagiarism detection or content similarity detection is the process of locating instances of plagiarism andor copyright infringement within a work or document.\nThe widespread use of computers and the advent of the Internet have made it easier to plagiarize the work of others.\nDetection of plagiarism can be undertaken in a variety of ways. Human detection is the most traditional form of identifying plagiarism from written work. \nThis can be a lengthy and time-consuming task for the reader and can also result in inconsistencies in how plagiarism is identified within an organization. \nText-matching software (TMS), which is also referred to as plagiarism detection software or anti-plagiarism software, has become widely \navailable, in the form of both commercially available products as well as open-source[examples needed] software. TMS does not actually detect plagiarism per se, but instead finds \nspecific passages of text in one document that match text in another document";
     return 0;
 }
+int plagrism()
+{
+    int plag;
+    cout << "1.Check plag\n";
+
+    cout << "2.Add Original Data To Data base\n";
+    cout << "3.Check Available File List\n";
+    cout << "4.About Plagchecker\n";
+    cout << "Enter your choice:-\t";
+    cin >> plag;
+    switch (plag)
+
+    {
+    case 1:
+    {
+        cout << "few";
+        string filename1, topicname1;
+        cout << "Enter topicname to check the plagrism:\t";
+        cin >> topicname1;
+        cout << "\n";
+        cout << "Enter filename to check the plagrism:\t";
+        cin >> filename1;
+        Sleep(1000);
+        loading();
+        PlagChecker(topicname1, filename1);
+
+        break;
+    }
+    case 2:
+    {
+        string filename2, content;
+        cout << "Enter filename of this file into database:\t";
+        cin >> filename2;
+        cout << "Enter content of this file into database:\t";
+        cin >> content;
+        Sleep(1000);
+        loading();
+        AddSourceFile(filename2, content);
+        cout << "many";
+        break;
+    }
+    case 3:
+    {
+        cout << "List of content available:-\t";
+        Sleep(1000);
+        cout << "more";
+        loading();
+        SourceFileList();
+        break;
+    }
+    case 4:
+
+        cout << "What is plagchecker?";
+        loading();
+        about();
+        break;
+    default:
+        cout << "Wrong choice";
+    }
+    return 0;
+}
+int headpage()
+{
+    int choice;
+    cout << "1.Plagrism Checker\n";
+    cout << "2.Spam Checker\n";
+    cout << "Enter your choice:-\t";
+    cin >> choice;
+    switch (choice)
+    {
+    case 1:
+        plagrism();
+        break;
+    case 2:
+        cout << "abhijot";
+        break;
+    default:
+        cout << "Wrong choice";
+    }
+    return 0;
+}
+
+int main()
+{
+    headpage();
+    return 0;
+}
+
+// int main()
+// {
+
+//     cout << "Hie Death";
+//     PlagChecker();
+
+//     return 0;
+// }
