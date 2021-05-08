@@ -2,18 +2,12 @@
 #include <windows.h>
 
 using namespace std;
+
+//Function Prototypes of the funcitons used throughout the Program.
 int SourceFileList();
 int AddSourceFile(string, string);
-void loading()
-{
-
-    for (int i = 0; i < 5; i++)
-    {
-        cout << "****";
-        Sleep(1000);
-    }
-}
-//yaha par kiya h add
+void loading();
+//Program For RabinKarp Algorithm For String Sequence Pattern Matching.
 float rabinKarp(char seq[], char arr[], int line, int sent_line)
 {
     //seq is the sentence of the input text and arr corresponds to lines of the output file.
@@ -70,8 +64,12 @@ float rabinKarp(char seq[], char arr[], int line, int sent_line)
     }
     return l;
 }
+//UDf for reading data from the user's file, data from sources according to the content name then segregate data sentance wise then passing it to RabinKarp Function For String Sequence Pattern Matching
+//If The The user data is found to be 100% Plagriasm Free Then that data is added to the database under the Topicname user gave earlier
 int PlagChecker(string TopicName = "Russia", string FileName = "inputtest")
 {
+
+    //
     ifstream SourceFile;
     SourceFile.open("Sources/" + TopicName + ".txt");
     string SourceFileText;
@@ -155,42 +153,50 @@ int PlagChecker(string TopicName = "Russia", string FileName = "inputtest")
     cout << " " << std::endl;
     return 0;
 }
-//yaha par
+// UDF for listing all the Orginal Sources File List.
 int SourceFileList()
 {
+    //variable to count number of File That Exist in that databse
     int NumberOfFiles = 0;
     ifstream myfile;
     myfile.open("Sources/FileList.txt");
+    //string variable to store names of the files present in the database available.
     string st1;
     while (getline(myfile, st1))
     {
+
         cout << st1 << ", ";
         NumberOfFiles++;
     }
     cout << endl;
+    //returning the number of files available in the database.
     return NumberOfFiles;
 }
-//aur yaha par bas
+// UDF for adding orginal data to our database and segregating into various content types
 int AddSourceFile(string FileName, string Content)
 {
-    int NumberOfFiles = 0;
-    ofstream myfile;
+
+    //int NumberOfFiles = 0;
+    //  Data File handling for saving the topic name in filelist
+    fstream myfile;
     myfile.open("Sources/FileList.txt", ios::app);
     myfile << endl
            << FileName;
     cout << endl;
+    //closeing the file opened
     myfile.close();
-    ofstream file;
+    fstream file;
+    // creating  File with name FileName to save content in it and if file already exist then add data in the end of it.
     file.open("Sources/" + FileName + ".txt", ios::app);
     file << endl
          << Content;
+    //closeing the file opened
 
     file.close();
     return 0;
 }
 
 const int ALPHABET_SIZE = 26;
-
 // trie node
 class TrieNode
 {
@@ -419,16 +425,19 @@ int SpamFilter()
 
     return 0;
 }
-int about()
+int aboutplag() // This function contains all the theory related to plagchecker
 {
     cout << "\n\nPlagiarism detection or content similarity detection is the process of locating instances of plagiarism andor copyright infringement within a work or document.\nThe widespread use of computers and the advent of the Internet have made it easier to plagiarize the work of others.\nDetection of plagiarism can be undertaken in a variety of ways. Human detection is the most traditional form of identifying plagiarism from written work. \nThis can be a lengthy and time-consuming task for the reader and can also result in inconsistencies in how plagiarism is identified within an organization. \nText-matching software (TMS), which is also referred to as plagiarism detection software or anti-plagiarism software, has become widely \navailable, in the form of both commercially available products as well as open-source[examples needed] software. TMS does not actually detect plagiarism per se, but instead finds \nspecific passages of text in one document that match text in another document";
     return 0;
 }
-int plagrism()
+void aboutspam() // This function contains all the theory related to spamchecker
+{
+    cout << " ";
+}
+int Plagiarism() //This function contains a menu for all functions which we will use in plagchecker
 {
     int plag;
     cout << "1.Check plag\n";
-
     cout << "2.Add Original Data To Data base\n";
     cout << "3.Check Available File List\n";
     cout << "4.About Plagchecker\n";
@@ -437,14 +446,14 @@ int plagrism()
     switch (plag)
 
     {
-    case 1:
+    case 1: //Case to check Plagiarism
     {
         cout << "few";
         string filename1, topicname1;
-        cout << "Enter topicname to check the plagrism:\t";
+        cout << "Enter topicname to check the Plagiarism:\t";
         cin >> topicname1;
         cout << "\n";
-        cout << "Enter filename to check the plagrism:\t";
+        cout << "Enter filename to check the Plagiarism:\t";
         cin >> filename1;
         Sleep(1000);
         loading();
@@ -452,7 +461,7 @@ int plagrism()
 
         break;
     }
-    case 2:
+    case 2: // Case to add data in the database
     {
         string filename2, content;
         cout << "Enter filename of this file into database:\t";
@@ -465,7 +474,7 @@ int plagrism()
         cout << "many";
         break;
     }
-    case 3:
+    case 3: //Case to check the content
     {
         cout << "List of content available:-\t";
         Sleep(1000);
@@ -474,38 +483,92 @@ int plagrism()
         SourceFileList();
         break;
     }
-    case 4:
+    case 4: //Case to get the information about plagchecker
 
         cout << "What is plagchecker?";
         loading();
-        about();
+        aboutplag();
         break;
     default:
         cout << "Wrong choice";
     }
     return 0;
 }
-int headpage()
+int spam() //This function contains a menu for all functions which we will use in spamchecker
+{
+    int spam;
+    cout << "1.Add Spam words to database\n";
+    cout << "2.To Check Spam\n";
+    cout << "3.About Spamchecker\n";
+    cout << "Enter your choice:-\t";
+    cin >> spam;
+    switch (spam)
+    {
+    case 1: //Case to add spam words into database
+    {
+        int n;
+        string word;
+        cout << "Enter count of words to be entered : ";
+        cin >> n;
+        while (n--)
+        {
+            cout << "\nEnter the word : ";
+            cin >> word;
+            loading();
+            addSpamWords("SpamWords", word);
+        }
+        break;
+    }
+    case 2: //Case to check spam
+    {
+        string name;
+        cout << "Enter filename of file to be check for spam : ";
+        cin >> name;
+        loading();
+        spamChecker(name);
+
+        break;
+    }
+    case 3: //Case to get information about spamchecker
+
+        cout << "What is spamchecker?";
+        loading();
+        aboutspam();
+        break;
+    default:
+        cout << "Wrong choice";
+    }
+    return 0;
+}
+int headpage() //This function has contains the menu to call the functions of plagchecker and spamchecker
 {
     int choice;
-    cout << "1.Plagrism Checker\n";
+    cout << "1.Plagiarism Checker\n";
     cout << "2.Spam Checker\n";
     cout << "Enter your choice:-\t";
     cin >> choice;
     switch (choice)
     {
     case 1:
-        plagrism();
+        Plagiarism(); //Function will call the Plagiarism menu
         break;
     case 2:
-        cout << "abhijot";
+        spam(); //Function will call the spam menu
         break;
     default:
         cout << "Wrong choice";
     }
     return 0;
 }
+void loading()
+{
 
+    for (int i = 0; i < 5; i++)
+    {
+        cout << "****";
+        Sleep(1000);
+    }
+}
 int main()
 {
     headpage();
