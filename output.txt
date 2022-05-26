@@ -1,0 +1,2 @@
+Total match sentence in the given input text is 26 and total sentence in the given input text is 29
+The give file has significant amount of Plagarism and it is 89.6552 %
