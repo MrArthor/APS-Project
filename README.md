@@ -1,16 +1,57 @@
-# APS Project  
-Introduction:  
+# Algorithm And Problem Solving Project
+## Plagarism And Spam Checher
 
 Plagiarism & Spam Checker is a project designed to mainly check the “common content” between the Content stored  and the content submitted by the user.
-It also lists out the Spam/Inappropriate words from the submitted work.  
+It also lists out the Spam/Inappropriate words from the submitted work.
 
-Objective:  
+- Made By [Vansh Sachdev](https://github.com/mrarthor)
+- Portfolio [MrArthor.xyz](http://mrarthor.xyz/)
+- Student At Jaypee Institute Of Information Technology
+- [LinkedIn](https://www.linkedin.com/in/mrarthor/)
 
-Basically, the code would be programmed in such a way that it is able to analyse the whole content and tell the users how much content of theirs is plagiarised or is taken from someone else’s work or simply lacks originality.  
-There will be a Local Database created for the working of this code. This Database would contain the content which would be used for checking the plagiarism for the content that the user would provide to us.  
 
-The user would be asked for the input of their content. When the user has given his content as an input, this is where programme comes into working. The programme would analyse the content and would tell us, in terms of percentage, that how much of the data is Plagiarised of the user.  
+## Classification Of String Matching Algorithms
 
-The code is also programmed in such a way that it is able to identify and print all the Spam or Inappropriate words that has been entered by the user.
-These words would also be stored in some local Database, for the code to identify it as an Inappropriate word  
+The various algorithms can be classified by the number of patterns each uses.
+- Single-pattern algorithms
+- Naïve string-search algorithm
+- Rabin–Karp algorithm
+- Knuth–Morris–Pratt algorithm
+- Boyer–Moore string-search algorithm
+- Longest Common Substring algorithm
 
+Algorithms using a finite set of patterns
+- Aho–Corasick string matching algorithm (extension of Knuth-Morris-Pratt)
+- Commentz-Walter algorithm (extension of Boyer-Moore)
+- Set-BOM (extension of Backward Oracle Matching)
+- Rabin–Karp string search algorithm.
+
+
+## Algorithm Description:
+
+
+
+### Rabin Karp Algorithm Approach:
+
+- A string search algorithm which compares a string's hash values, rather than the strings themselves. We are taking a help of Karp-Rabin Algorithm. It uses fingerprints to find occurrences of one string into another string. Karp-Rabin Algorithm reduces time of comparison of two sequences by assigning hash value to each string and word. Without hash value, it takes too much time for comparison like if there is a word W and input string is S then word is compared with every string and sub string in program and hence it consumes moretime. 
+Karp-Rabin has introduced concept of Hash value to avoid time complexity O(m2). It assigns hash value by calculating to both word and string/substring. So hash of substring (S) matches with hash value of W then only we can say exact comparison is done.
+
+
+#### Hash Values:
+
+- A hash value is a numeric value of a fixed length that uniquely identifies data. The most wonderful character of Hash Values is that they are highly unique. No two data can theoretically have same Hash Value.
+Karp-Rabin algorithm preferred category from left to right comparison. Function of hash must able to find has value efficiently. When first time name would be hashing with the same hash it save the data causing yields a value which will be compared to at data is index with the value.
+It can deal with multiple pattern matching that’s why people preferred this Karp-Rabin algorithm. Otherwise behavior of other algorithm is to perform basic pattern matching. 
+Its having O(nm) complexity. Where n is length of text and m is length of pattern. It is little bit slow also due to we have to check every single character from the text. The steps followed for algorithm development are as follows:
+• We have taken String s and an input file and the patterns taken are each 	sentence separated by delimiter full stop in String s.
+• For each sentence we checked if the sentence is matched with any of the 	lines of input files.
+• At last we have kept two counters :- m for total number of sentences in 	the string s and n for total number of matched sentences of string s.
+
+
+### ALOGORITHM USED FOR PLAGIARSM CHECKER:
+
+- This algorithm is based on the concept of hashing, so if you are not familiar with string hashing.
+Rabin Karp algorithm matches the hash value of the pattern with the hash value of current substring of text, and if the hash values match then only it starts matching individual characters. So Rabin Karp algorithm needs to calculate hash values for following strings.
+1) Pattern itself. 
+2) All the substrings of the text of length m. 
+This algorithm was authored by Rabin and Karp in 1987.
